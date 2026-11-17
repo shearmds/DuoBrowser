@@ -48,7 +48,8 @@ final class WebsiteDataController: ObservableObject {
     struct Entry: Identifiable {
         let id = UUID()
         let record: WKWebsiteDataRecord
-        var name: String { record.displayName }
+        let name: String // Read once on the main actor; displayName is main-actor isolated.
+        @MainActor init(record: WKWebsiteDataRecord) { self.record = record; name = record.displayName }
     }
     @Published private(set) var entries: [Entry] = []
     @Published private(set) var isBusy = false

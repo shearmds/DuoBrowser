@@ -9,7 +9,6 @@ import Combine
 /// through BrowserSession's normal-history/archive observers.
 @MainActor
 final class TabOverviewUpdates: ObservableObject {
-    let objectWillChange = ObservableObjectPublisher()
     private var ids: [UUID] = []
     private var observation: AnyCancellable?
 
