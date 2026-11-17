@@ -2,6 +2,7 @@ import SwiftUI
 
 enum PageControlsAction {
     case share, save, find, reader, protection, websiteSettings
+    case saveToCaddy // fork-only: CaddyShare.swift
     case newTab, forward, pin, workspaces, library, downloads, settings
     #if DEBUG
     case regions, fixture
@@ -9,7 +10,7 @@ enum PageControlsAction {
 
     var requiresCurrentDocument: Bool {
         switch self {
-        case .share, .save, .find, .reader, .protection, .websiteSettings, .forward: return true
+        case .share, .save, .find, .reader, .protection, .websiteSettings, .forward, .saveToCaddy: return true
         default: return false
         }
     }
@@ -67,6 +68,9 @@ struct PageControlsView: View {
                             destination("Website Protection", subtitle: protectionStatus,
                                         symbol: session.adBlockingEnabled && browser.blockAds ? "checkmark.shield" : "shield.slash",
                                         action: .protection)
+                            Divider().padding(.leading, 40)
+                            destination("Save to Caddy", subtitle: "The full article, as you see it",
+                                        symbol: "tray.and.arrow.down", action: .saveToCaddy)
                         }
                     }
                     tabActions

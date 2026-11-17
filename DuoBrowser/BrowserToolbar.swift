@@ -302,6 +302,8 @@ struct BrowserToolbar: View {
             showingProtection = true
         case .websiteSettings:
             websiteSettings = WebsiteSettingsScope(browser: browser)
+        case .saveToCaddy:
+            CaddyShare.save(browser)
         case .newTab:
             session.newTab()
         case .forward:
